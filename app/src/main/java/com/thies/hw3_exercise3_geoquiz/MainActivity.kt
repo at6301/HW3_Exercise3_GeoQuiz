@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     // Variable to keep track of index as working through strings
     private var currentIndex = 0
     // counter to keep track of the number of right answers
-    private final var rightAnswersCounter : Int = 0
+    private var rightAnswersCounter : Int = 0
     // integer variable to hold score
     private var score : Int = 0
     // result string
@@ -60,7 +60,10 @@ class MainActivity : AppCompatActivity() {
         updateQuestion()
     }
     private fun updateQuestion() {
-        if(currentIndex == questionBank.size) {
+        // test
+        //Toast.makeText(this, currentIndex.toString(), Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, questionBank.size.toString(), Toast.LENGTH_LONG).show()
+        if(currentIndex + 1 == questionBank.size) {
             calculateScore()
         }
         else{
@@ -87,12 +90,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun calculateScore() {
+        Toast.makeText(this, rightAnswersCounter.toString(), Toast.LENGTH_LONG).show()
         score = rightAnswersCounter / questionBank.size
         showResults()
     }
 
     private fun showResults() {
-        resultString = "You scored a: "
+        resultString = "You scored a: " + score
         Toast.makeText(this, resultString, Toast.LENGTH_LONG).show()
     }
 
@@ -105,6 +109,8 @@ class MainActivity : AppCompatActivity() {
         binding.falseButton.isEnabled = true
         binding.trueButton.isEnabled = true
     }
+
+
 
     override fun onStart() {
         super.onStart()
