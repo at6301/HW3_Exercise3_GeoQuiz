@@ -30,9 +30,9 @@ class MainActivity : AppCompatActivity() {
     // Variable to keep track of index as working through strings
     private var currentIndex = 0
     // counter to keep track of the number of right answers
-    private var rightAnswersCounter : Int = 0
+    private var rightAnswersCounter = 0
     // integer variable to hold score
-    private var score : Int = 0
+    private var score = 0
     // result string
     private lateinit var resultString : String
 
@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         binding.nextButton.setOnClickListener{
             // check if it is last question
             currentIndex = (currentIndex + 1) % questionBank.size
+            //Toast.makeText(this, currentIndex.toString(), Toast.LENGTH_LONG).show()
             updateQuestion()
             enableButtons()
         }
@@ -63,12 +64,11 @@ class MainActivity : AppCompatActivity() {
         // test
         //Toast.makeText(this, currentIndex.toString(), Toast.LENGTH_LONG).show()
         //Toast.makeText(this, questionBank.size.toString(), Toast.LENGTH_LONG).show()
-        if(currentIndex + 1 == questionBank.size) {
+        val questionTextResId = questionBank[currentIndex].textResId
+        binding.questionTextview.setText(questionTextResId)
+
+        if(currentIndex == 5) {
             calculateScore()
-        }
-        else{
-            val questionTextResId = questionBank[currentIndex].textResId
-            binding.questionTextview.setText(questionTextResId)
         }
     }
     private fun checkAnswer(userAnswer: Boolean) {
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showResults() {
         resultString = "You scored a: " + score
-        Toast.makeText(this, resultString, Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, resultString, Toast.LENGTH_LONG).show()
     }
 
     private fun disableButtons() {
